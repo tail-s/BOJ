@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
         int N = sc.nextInt();
         int X = sc.nextInt();
         int[] arr = new int[N];
@@ -25,9 +24,11 @@ public class Main {
                 cnt = 1;
             } else if (val == ans) cnt++;
         }
-        if (ans == 0) sb.append("SAD");
-        else sb.append(ans + "\n" + cnt);
-        System.out.println(sb.toString());
+        if (ans == 0) {
+            System.out.println("SAD");
+        } else {
+            System.out.println(ans + "\n" + cnt);
+        }
     }
 
 }
