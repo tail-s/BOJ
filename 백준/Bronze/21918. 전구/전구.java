@@ -15,20 +15,20 @@ public class Main {
         while (M-- > 0) {
             order = sc.nextInt();
             l = sc.nextInt() - 1;
-            r = sc.nextInt() - 1;
+            r = sc.nextInt();
 
             switch (order) {
                 case 1:
-                    arr[l] = r + 1 == 1;
+                    arr[l] = r == 1;
                     break;
                 case 2:
-                    for (int i = l; i <= r; i++) { arr[i] = !arr[i]; }
+                    for (int i = l; i < r; i++) { arr[i] = !arr[i]; }
                     break;
                 case 3:
-                    for (int i = l; i <= r; i++) { arr[i] = false; }
+                    for (int i = l; i < r; i++) { arr[i] = false; }
                     break;
                 default:
-                    for (int i = l; i <= r; i++) { arr[i] = true; }
+                    for (int i = l; i < r; i++) { arr[i] = true; }
             }
         }
         sc.close();
