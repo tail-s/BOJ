@@ -4,7 +4,7 @@ import java.util.Stack;
 public class Main {
     static StringBuilder sb = new StringBuilder();
     static int n;
-    static int[][] drc = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 0}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
+    static int[][] drc = { {-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1} };
     static char[][] target;
     static char[][] map;
     static boolean out(int r, int c) { return r < 0 || r >= n || c < 0 || c >= n; }
@@ -20,7 +20,7 @@ public class Main {
             if (map[r][c] == 'x') {
                 if (target[r][c] == '*') flag = true;
                 int cnt = 0;
-                for (int i = 0; i < 9; i++) {
+                for (int i = 0; i < 8; i++) {
                     int tr = r + drc[i][0];
                     int tc = c + drc[i][1];
                     if (out(tr, tc)) continue;
