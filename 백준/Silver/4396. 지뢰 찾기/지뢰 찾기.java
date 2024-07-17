@@ -16,9 +16,11 @@ public class Main {
         while (size < n * n) {
             int r = size / n;
             int c = size % n;
-            if (target[r][c] == '*') s.push(new int[]{r, c});
-            if (map[r][c] == 'x') {
-                if (target[r][c] == '*') flag = true;
+
+            if (target[r][c] == '*') {
+                s.push(new int[]{r, c});
+                if (!flag && map[r][c] == 'x') flag = true;
+            } else if (map[r][c] == 'x') {
                 int cnt = 0;
                 for (int i = 0; i < 8; i++) {
                     int tr = r + drc[i][0];
