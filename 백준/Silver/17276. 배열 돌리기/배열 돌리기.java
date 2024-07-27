@@ -8,9 +8,7 @@ public class Main {
     static int n, a;
     static int[][] map, ans, d;
     static int[] NA = new int[2];
-//    static String[] arr = {"-3", "-2", "-1", "-0", "+3", "+2", "+1", "+0", "-3", "-2", "-1", "-0"};
-//    static String[] arr = {"+3", "+2", "+1", "+0", "-3", "-2", "-1", "-0", "+3", "+2", "+1", "+0"};
-static String[] arr = {"+0", "+1", "+2", "+3", "-0", "-1", "-2", "-3", "+0", "+1", "+2", "+3"};
+    static String[] arr = {"+0", "+1", "+2", "+3", "-0", "-1", "-2", "-3", "+0", "+1", "+2", "+3"};
     static int[] reverse(int[] arr) {
         int[] result = new int[arr.length];
         for (int i = 0; i < arr.length; i++) result[i] = arr[arr.length - 1 - i];
