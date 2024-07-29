@@ -9,36 +9,38 @@ public class Main {
     static int N, M, T, ans = Integer.MAX_VALUE;
     static int[][] drc = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
     static int[][] map;
-    static boolean[][][] visited;
-    static boolean out(int r, int c, int gram) { return r < 0 || c < 0 || r >= N || c >= M || visited[r][c][gram] || (gram == 0 && map[r][c] == 1); }
+    static boolean[][] visited;
+    static boolean out(int r, int c) { return r < 0 || c < 0 || r >= N || c >= M || visited[r][c] || map[r][c] == 1; }
 
     static class Status {
-        int r, c, gram, timer;
-        public Status(int r, int c, int gram, int timer) {
+        int r, c, timer;
+        public Status(int r, int c, int timer) {
             this.r = r;
             this.c = c;
-            this.gram = gram;
             this.timer = timer;
         }
     }
 
     static void bfs() {
-        visited[0][0][0] = true;
+        visited[0][0] = true;
         Queue<Status> q = new ArrayDeque<>();
-        q.offer(new Status(0, 0, 0, 0));
+        q.offer(new Status(0, 0, 0));
 
         while (!q.isEmpty()) {
             Status status = q.poll();
             if (status.timer >= ans || status.timer > T) return;
             int r = status.r, c = status.c;
-            if (status.gram == 0 && map[r][c] == 2) status.gram = 1;
+            if (map[r][c] == 2 && status.timer + N - 1 - r + M - 1 - c <= T) {
+                ans = Math.min(ans, status.timer + N - 1 - r + M - 1 - c);
+                continue;
+            }
             if (r == N - 1 && c == M - 1) ans = Math.min(ans, status.timer);
 
             for (int k = 0; k < 4; k++) {
                 int tr = r + drc[k][0], tc = c + drc[k][1];
-                if (out(tr, tc, status.gram)) continue;
-                visited[tr][tc][status.gram] = true;
-                q.offer(new Status(tr, tc, status.gram, status.timer + 1));
+                if (out(tr, tc)) continue;
+                visited[tr][tc] = true;
+                q.offer(new Status(tr, tc, status.timer + 1));
             }
 
         }
@@ -51,7 +53,7 @@ public class Main {
         M = Integer.parseInt(info[1]);
         T = Integer.parseInt(info[2]);
         map = new int[N][M];
-        visited = new boolean[N][M][2];
+        visited = new boolean[N][M];
         for (int i = 0; i < N; i++) map[i] = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         br.close();
 
