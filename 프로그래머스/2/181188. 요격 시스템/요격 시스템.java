@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution {
-    static class Target implements Comparable<Target> {
+    class Target implements Comparable<Target> {
         int s, e;
         Target(int s, int e) {
             this.s = s;
