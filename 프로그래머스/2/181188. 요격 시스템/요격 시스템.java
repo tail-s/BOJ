@@ -1,39 +1,41 @@
 import java.util.*;
 
 class Solution {
-    class Target implements Comparable<Target> {
+    public static class Target implements Comparable<Target> {
         int s, e;
+        
         Target(int s, int e) {
             this.s = s;
             this.e = e;
         }
         
         @Override
-        public int compareTo(Target O) {
-            if (this.s == O.s) return this.e - O.e;
-            return this.s - O.s;
+        public int compareTo(Target o) {
+            if (this.s == o.s) return o.e - this.e;
+            return this.s - o.s;
         }
     }
     
     public int solution(int[][] targets) {
         int answer = 0;
+        
         PriorityQueue<Target> pq = new PriorityQueue<>();
-        for (int[] t : targets) pq.offer(new Target(t[0], t[1]));
+        for (int i = 0; i < targets.length; i++) pq.offer(new Target(targets[i][0], targets[i][1]));
         
-        Target now = pq.poll();
-        int s = now.s;
-        int e = now.e;
-        answer++;
-        
-        while(!pq.isEmpty()) {
-            now = pq.poll();
-            if (now.s >= e) {
+        int cur_s = 0, cur_e = 0;
+        while (!pq.isEmpty()) {
+            Target t = pq.poll();
+            if (t.s < cur_e) {
+                cur_s = t.s;
+                if (t.e < cur_e) cur_e = t.e;                
+            }
+            else {
+                cur_s = t.s;
+                cur_e = t.e;
                 answer++;
-                s = now.s;
-                e = now.e;
-            } else e = Math.min(e, now.e);
-            
+            }
         }
+        
         
         return answer;
     }
